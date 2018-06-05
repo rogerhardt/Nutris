@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Nutris.Models;
 
 namespace Nutris.Controllers
@@ -58,70 +59,93 @@ namespace Nutris.Controllers
             return View(usuario);
         }
 
-        // GET: Usuario/Edit/5
-        public ActionResult Edit(string id)
+        [HttpGet]
+        public ActionResult Login()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
+            return View();
         }
 
-        // POST: Usuario/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Usuario");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "login,password,email,nutricionista")] Usuario usuario)
+        public ActionResult Login([Bind(Include = "login,password,rememberMe")] UsuarioLogin usu, string ReturnUrl = "")
         {
-            if (ModelState.IsValid)
+            string message = "";
+            using (db)
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Usuario v = db.Usuarios.Where(a => a.login == usu.login).FirstOrDefault();
+                if (v != null)
+                {
+                    if (string.Compare(usu.password, v.password) == 0)
+                    {
+                        int timeout = usu.rememberMe ? 525600 : 20; // 525600 min = 1 year
+                        var ticket = new FormsAuthenticationTicket(usu.login, usu.rememberMe, timeout);
+                        string encrypted = FormsAuthentication.Encrypt(ticket);
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                        cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                        cookie.HttpOnly = true;
+                        Response.Cookies.Add(cookie);
+
+
+                        if (Url.IsLocalUrl(ReturnUrl))
+                        {
+                            return Redirect(ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        message = "Usuário ou Senha Inválido";
+                    }
+                }
+                else
+                {
+                    message = "Usuário ou Senha Inválido";
+                }
             }
-            return View(usuario);
+            ViewBag.Message = message;
+            return View();
         }
 
-        // GET: Usuario/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
+        //// GET: Usuario/Edit/5
+        //public ActionResult Edit(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Usuario usuario = db.Usuarios.Find(id);
+        //    if (usuario == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(usuario);
+        //}
 
-        // POST: Usuario/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Usuario usuario = db.Usuarios.Find(id);
-            db.Usuarios.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //// POST: Usuario/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "login,password,email,nutricionista")] Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(usuario).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(usuario);
+        //}
     }
 }
