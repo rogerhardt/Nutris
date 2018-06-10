@@ -15,36 +15,11 @@ namespace Nutris.Controllers
     {
         private NutrisEntities db = new NutrisEntities();
 
-        // GET: Usuario
-        public ActionResult Index()
-        {
-            return View(db.Usuarios.ToList());
-        }
-
-        // GET: Usuario/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        // GET: Usuario/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Usuario/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "login,password,email,nutricionista")] Usuario usuario)
@@ -53,7 +28,7 @@ namespace Nutris.Controllers
             {
                 db.Usuarios.Add(usuario);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
 
             return View(usuario);
@@ -100,7 +75,14 @@ namespace Nutris.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            if (v.nutricionista)
+                            {
+                                return RedirectToAction("IndexNutri", "Home");
+                            }
+                            else
+                            {
+                                return RedirectToAction("IndexCliente", "Home");
+                            }
                         }
                     }
                     else
@@ -116,36 +98,5 @@ namespace Nutris.Controllers
             ViewBag.Message = message;
             return View();
         }
-
-        //// GET: Usuario/Edit/5
-        //public ActionResult Edit(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Usuario usuario = db.Usuarios.Find(id);
-        //    if (usuario == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(usuario);
-        //}
-
-        //// POST: Usuario/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "login,password,email,nutricionista")] Usuario usuario)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(usuario).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(usuario);
-        //}
     }
 }

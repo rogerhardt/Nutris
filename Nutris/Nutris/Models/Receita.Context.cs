@@ -13,10 +13,10 @@ namespace Nutris.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NutrisEntities : DbContext
+    public partial class NutrisEntities1 : DbContext
     {
-        public NutrisEntities()
-            : base("name=NutrisEntities")
+        public NutrisEntities1()
+            : base("name=NutrisEntities1")
         {
         }
     
@@ -25,8 +25,6 @@ namespace Nutris.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Usuario> Usuarios { get; set; }
-
-        public System.Data.Entity.DbSet<Nutris.Models.Receita> Receitas { get; set; }
+        public virtual DbSet<Receita> Receitas { get; set; }
     }
 }

@@ -16,9 +16,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Projeto Nutris", "Login", "Usuario", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Projeto Nutris", "IndexNutri", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "IndexNutri", "Home")</li>
+                    <li>@Html.ActionLink("Receitas", "Index", "Receitas")</li>
+                    <li>@Html.ActionLink("Dietas", "IndexNutri", "Dietas")</li>
+                    <li>@Html.ActionLink("Avaliações", "IndexNutri", "Avaliacoes")</li>
+                </ul>
                 @if (Request.IsAuthenticated)
                 {
                     using (Html.BeginForm("Logout", "Usuario", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

@@ -9,7 +9,13 @@ namespace Nutris.Controllers
     public class HomeController : Controller
     {
         [Authorize]
-        public ActionResult Index()
+        public ActionResult IndexNutri()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult IndexCliente()
         {
             return View();
         }
