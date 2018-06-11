@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Nutris.Controllers
 {
     public class HomeController : Controller
-    {
+    {   
         [Authorize]
         public ActionResult IndexNutri()
         {
