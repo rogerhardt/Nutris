@@ -9,6 +9,7 @@
 	- Usuário Cliente(Paciente) Visualizar suas Avaliações (importante)
 	- Usuário Cliente(Paciente) Registrar seu consumo diário (importante)
 	- Usuário Nutricionista visualizar Consumos Diários de Clientes(Pacientes) (importante)
+	- Ajustar páginas IndexCliente e IndexNutri do Home para mostrar botões e informações relevantes.
 
 DOING Róger:
 	- Associar Planos Alimentares a Clientes(Pacientes)

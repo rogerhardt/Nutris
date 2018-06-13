@@ -5,19 +5,17 @@
 
 <div class="jumbotron">
     <h1>Projeto Nutris</h1>
-    <p class="lead">Bem vindo @HttpContext.Current.User.Identity.Name Nutricionista</p>
+    <p class="lead">Bem vindo @HttpContext.Current.User.Identity.Name</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Planos Alimentares</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Cadastro de Planos Alimentares e sua atribuição à Pacientes.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href='@Url.Action("Index","PlanoAlimentar")'>Planos &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Get more libraries</h2>
