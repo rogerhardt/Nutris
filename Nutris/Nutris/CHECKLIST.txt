@@ -1,0 +1,15 @@
+﻿DONE:
+	- Cadastro de Usuário Nutricionista e Usuário Cliente(Paciente)
+	- Login
+	- Cadastro de Planos Alimentares e Subitens
+
+ TODO:
+	- Alterar usuário Cliente para usuário Paciente para ficar mais condizente (Opcional)
+	- Usuário Nutricionista Manter Avaliação de Pacientes (importante)
+	- Usuário Cliente(Paciente) Visualizar suas Avaliações (importante)
+	- Usuário Cliente(Paciente) Registrar seu consumo diário (importante)
+	- Usuário Nutricionista visualizar Consumos Diários de Clientes(Pacientes) (importante)
+
+DOING Róger:
+	- Associar Planos Alimentares a Clientes(Pacientes)
+	- Cliente(Paciente) visualizar seus planos alimentares
