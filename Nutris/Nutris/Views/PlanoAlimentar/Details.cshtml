@@ -5,31 +5,39 @@
     Layout = "~/Views/Shared/_LayoutNutri.cshtml";
 }
 
-<h2>Detalhes</h2>
-
 <div>
-    <h4>@Html.DisplayNameFor(modelItem => Model.PlanoAlimentar.Descricao)</h4>
+    <h2>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Nome)</h2>
+    <h4>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Descricao)</h4>
+    <br />
+    <h5>Dieta do Plano:</h5>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Descrição</th>
-                <th scope="col">Quantidade(mg)</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.items)
-            {   
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descricao)
-                        @Html.DisplayFor(modelItem => item.Quantia)
-                    </td>
-                </tr>
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantia)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditItem", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir", "DeleteItem", new { id = item.Id })
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PlanoAlimentar.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <input type="button" class="btn btn-default btn-sm" value="Retornar" onclick="location.href='@Url.Action("Index")'" />
+    <input type="button" class="btn btn-primary btn-sm" value="Incluir Novo Item" onclick="location.href='@Url.Action("CreateItem", new { IdPlanoAlimentar = Model.PlanoAlimentar.Id } )'" />
 </p>

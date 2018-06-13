@@ -277,6 +277,9 @@
     <Content Include="Views\PlanoAlimentar\Edit.cshtml" />
     <Content Include="Views\PlanoAlimentar\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\PlanoAlimentar\CreateItem.cshtml" />
+    <Content Include="Views\PlanoAlimentar\EditItem.cshtml" />
+    <Content Include="Views\PlanoAlimentar\DeleteItem.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

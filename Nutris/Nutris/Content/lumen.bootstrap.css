@@ -146,6 +146,8 @@ select,
 textarea {
     color: inherit;
     font: inherit;
+    width: 280px;
+    height: 200px;
     margin: 0;
 }
 

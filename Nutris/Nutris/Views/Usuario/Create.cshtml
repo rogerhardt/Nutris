@@ -57,14 +57,11 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Confirmar" class="btn btn-default" />
+                <input type="button" class="btn btn-default" value="Retornar" onclick="location.href='@Url.Action("Index")'" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Voltar a tela de login", "Login")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
