@@ -26,7 +26,8 @@ namespace Nutris.Models
         }
     
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<ItemReceita> ItemReceitas { get; set; }
+        public DbSet<PlanoAlimentar> PlanoAlimentar { get; set; }
         public DbSet<Receita> Receitas { get; set; }
+        public DbSet<ItemPlanoAlimentar> ItemPlanoAlimentar { get; set; }
     }
 }

@@ -167,7 +167,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReceitasController.cs" />
+    <Compile Include="Controllers\PlanoAlimentarController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,7 +178,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entidades.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ItemReceita.cs">
+    <Compile Include="Models\ItemPlanoAlimentar.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -191,9 +191,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanoAlimentar.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Receita.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanoAlimentarViewModel.cs" />
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -267,11 +271,11 @@
     <Content Include="Views\Home\IndexCliente.cshtml" />
     <Content Include="Views\Shared\_LayoutCliente.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Receitas\Create.cshtml" />
-    <Content Include="Views\Receitas\Delete.cshtml" />
-    <Content Include="Views\Receitas\Details.cshtml" />
-    <Content Include="Views\Receitas\Edit.cshtml" />
-    <Content Include="Views\Receitas\Index.cshtml" />
+    <Content Include="Views\PlanoAlimentar\Create.cshtml" />
+    <Content Include="Views\PlanoAlimentar\Delete.cshtml" />
+    <Content Include="Views\PlanoAlimentar\Details.cshtml" />
+    <Content Include="Views\PlanoAlimentar\Edit.cshtml" />
+    <Content Include="Views\PlanoAlimentar\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup />

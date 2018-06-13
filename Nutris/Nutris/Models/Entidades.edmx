@@ -5,21 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="NutrisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ItemReceita">
+        <EntityType Name="ItemPlanoAlimentar">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Quantia" Type="varchar" MaxLength="50" />
-          <Property Name="IdReceita" Type="int" Nullable="false" />
+          <Property Name="IdPlanoAlimentar" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlanoAlimentar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar(max)" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Receita">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descricao" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descricao" Type="varchar(max)" Nullable="false" />
           <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -32,7 +41,8 @@
           <Property Name="nutricionista" Type="bit" Nullable="false" />
         </EntityType>
         <EntityContainer Name="NutrisModelStoreContainer">
-          <EntitySet Name="ItemReceita" EntityType="Self.ItemReceita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemPlanoAlimentar" EntityType="Self.ItemPlanoAlimentar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanoAlimentar" EntityType="Self.PlanoAlimentar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receita" EntityType="Self.Receita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -51,25 +61,35 @@
         </EntityType>
         <EntityContainer Name="NutrisEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
-          <EntitySet Name="ItemReceitas" EntityType="NutrisModel.ItemReceita" />
+          <EntitySet Name="PlanoAlimentar" EntityType="NutrisModel.PlanoAlimentar" />
           <EntitySet Name="Receitas" EntityType="NutrisModel.Receita" />
+          <EntitySet Name="ItemPlanoAlimentar" EntityType="NutrisModel.ItemPlanoAlimentar" />
         </EntityContainer>
-        <EntityType Name="ItemReceita">
+        <EntityType Name="PlanoAlimentar">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Quantia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdReceita" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Receita">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ItemPlanoAlimentar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Quantia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPlanoAlimentar" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -87,11 +107,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ItemReceitas">
-            <EntityTypeMapping TypeName="NutrisModel.ItemReceita">
-              <MappingFragment StoreEntitySet="ItemReceita">
-                <ScalarProperty Name="IdReceita" ColumnName="IdReceita" />
-                <ScalarProperty Name="Quantia" ColumnName="Quantia" />
+          <EntitySetMapping Name="PlanoAlimentar">
+            <EntityTypeMapping TypeName="NutrisModel.PlanoAlimentar">
+              <MappingFragment StoreEntitySet="PlanoAlimentar">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -101,6 +121,16 @@
             <EntityTypeMapping TypeName="NutrisModel.Receita">
               <MappingFragment StoreEntitySet="Receita">
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemPlanoAlimentar">
+            <EntityTypeMapping TypeName="NutrisModel.ItemPlanoAlimentar">
+              <MappingFragment StoreEntitySet="ItemPlanoAlimentar">
+                <ScalarProperty Name="IdPlanoAlimentar" ColumnName="IdPlanoAlimentar" />
+                <ScalarProperty Name="Quantia" ColumnName="Quantia" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -120,8 +150,8 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

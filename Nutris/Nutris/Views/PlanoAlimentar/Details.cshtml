@@ -1,0 +1,35 @@
+﻿@model Nutris.Models.PlanoAlimentarViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutNutri.cshtml";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>@Html.DisplayNameFor(modelItem => Model.PlanoAlimentar.Descricao)</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Descrição</th>
+                <th scope="col">Quantidade(mg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.items)
+            {   
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                        @Html.DisplayFor(modelItem => item.Quantia)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PlanoAlimentar.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
