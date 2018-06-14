@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Nutris.Models.PlanoAlimentar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNutri.cshtml";
+}
+
+<h2>Planos Alimentares</h2>
+<br />
+<input type="button" class="btn btn-primary btn-sm" value="Cadastrar Novo Plano" onclick="location.href='@Url.Action("Create")'" />
+<p />
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>Ações</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

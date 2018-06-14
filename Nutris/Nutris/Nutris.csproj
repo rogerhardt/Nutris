@@ -292,6 +292,11 @@
     <Content Include="Views\PlanoAlimentar\PlanoPacienteIndex.cshtml" />
     <Content Include="Views\PlanoAlimentar\CreatePlanoPaciente.cshtml" />
     <Content Include="Views\PlanoAlimentar\DeletePlanoPaciente.cshtml" />
+    <Content Include="Views\Avaliacao\Create.cshtml" />
+    <Content Include="Views\Avaliacao\Edit.cshtml" />
+    <Content Include="Views\Avaliacao\Index.cshtml" />
+    <Content Include="Views\Avaliacao\Delete.cshtml" />
+    <Content Include="Views\Avaliacao\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
