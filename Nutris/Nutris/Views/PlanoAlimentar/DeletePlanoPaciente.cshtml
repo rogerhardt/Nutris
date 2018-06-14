@@ -25,7 +25,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="button" class="btn btn-default" value="Retornar" onclick="location.href='@Url.Action("PlanoPacienteIndex", new { IdPlanoPaciente = Model.IdPlanoAlimentar})'" />
+            <input type="button" class="btn btn-default" value="Retornar" onclick="location.href='@Url.Action("PlanoPacienteIndex", new { id = Model.IdPlanoAlimentar})'" />
             <input type="submit" value="Confirmar" class="btn btn-danger" />
         </div>
     }

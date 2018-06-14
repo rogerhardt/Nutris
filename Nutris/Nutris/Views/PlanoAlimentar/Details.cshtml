@@ -9,7 +9,7 @@
     <h2>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Nome)</h2>
     <h4>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Descricao)</h4>
     <br />
-    <input type="button" class="btn btn-default btn-sm" value="Associar Pacientes" onclick="location.href='@Url.Action("PlanoPacienteIndex", new { IdPlanoAlimentar = Model.PlanoAlimentar.Id })'" />
+    <input type="button" class="btn btn-default btn-sm" value="Associar Pacientes" onclick="location.href='@Url.Action("PlanoPacienteIndex", new { id = Model.PlanoAlimentar.Id })'" />
     <br />
     <h5>Dieta do Plano:</h5>
     <table class="table table-hover">
