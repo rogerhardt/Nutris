@@ -198,6 +198,7 @@
     <Compile Include="Models\PlanoAlimentar.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AvaliacaoViewModel.cs" />
     <Compile Include="Models\PlanoPaciente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

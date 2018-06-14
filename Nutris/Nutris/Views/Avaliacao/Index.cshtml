@@ -1,18 +1,18 @@
-﻿@model IEnumerable<Nutris.Models.PlanoAlimentar>
+﻿@model IEnumerable<Nutris.Models.Avaliacao>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutNutri.cshtml";
 }
 
-<h2>Planos Alimentares</h2>
+<h2>Avaliações</h2>
 <br />
-<input type="button" class="btn btn-primary btn-sm" value="Cadastrar Novo Plano" onclick="location.href='@Url.Action("Create")'" />
+<input type="button" class="btn btn-primary btn-sm" value="Cadastrar nova avaliação" onclick="location.href='@Url.Action("Create")'" />
 <p />
 <table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Data)
         </th>
         <th>Ações</th>
     </tr>
@@ -21,7 +21,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                @Html.DisplayFor(modelItem => item.Detalhe)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
