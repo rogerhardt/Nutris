@@ -194,6 +194,10 @@
     <Compile Include="Models\PlanoAlimentar.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanoPaciente.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanoPacienteViewModel.cs" />
     <Compile Include="Models\Receita.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -281,6 +285,9 @@
     <Content Include="Views\PlanoAlimentar\CreateItem.cshtml" />
     <Content Include="Views\PlanoAlimentar\EditItem.cshtml" />
     <Content Include="Views\PlanoAlimentar\DeleteItem.cshtml" />
+    <Content Include="Views\PlanoAlimentar\PlanoPacienteIndex.cshtml" />
+    <Content Include="Views\PlanoAlimentar\CreatePlanoPaciente.cshtml" />
+    <Content Include="Views\PlanoAlimentar\DeletePlanoPaciente.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

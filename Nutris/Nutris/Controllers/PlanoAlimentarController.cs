@@ -45,6 +45,25 @@ namespace Nutris.Controllers
             return View(PlanoAlimentarView);
         }
 
+        [Authorize]
+        public ActionResult PlanoPacienteIndex(int? id)
+        {
+            PlanoAlimentar PlanoAlimentar = db.PlanoAlimentar.Find(id);
+            if (PlanoAlimentar == null)
+            {
+                return HttpNotFound();
+            }
+
+            List<PlanoPaciente> Pacientes = db.PlanoPaciente.Where(a => a.IdPlanoAlimentar == PlanoAlimentar.Id).ToList();
+            PlanoPacienteViewModel PlanoPacienteView = new PlanoPacienteViewModel
+            {
+                PlanoAlimentar = PlanoAlimentar,
+                Pacientes = Pacientes
+            };
+
+            return View(PlanoPacienteView);
+        }
+
         // GET: PlanoAlimentar/Create
         [Authorize]
         public ActionResult Create()

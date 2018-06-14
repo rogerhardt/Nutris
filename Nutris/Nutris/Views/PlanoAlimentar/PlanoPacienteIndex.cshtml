@@ -1,0 +1,37 @@
+﻿@model Nutris.Models.PlanoPacienteViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutNutri.cshtml";
+}
+
+<div>
+    <h2>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Nome)</h2>
+    <h4>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Descricao)</h4>
+    <br />
+    <h5>Pacientes Associados:</h5>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Login</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Pacientes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Login)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Excluir", "DeletePlanoPaciente", new { IdPlanoAlimentar = item.IdPlanoAlimentar, item.Login })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p>
+    <input type="button" class="btn btn-default btn-sm" value="Retornar" onclick="location.href='@Url.Action("Details", new { id = Model.PlanoAlimentar.Id})'" />
+    <input type="button" class="btn btn-primary btn-sm" value="Incluir Paciente" onclick="location.href='@Url.Action("CreatePlanoPaciente", new { IdPlanoAlimentar = Model.PlanoAlimentar.Id } )'" />
+</p>

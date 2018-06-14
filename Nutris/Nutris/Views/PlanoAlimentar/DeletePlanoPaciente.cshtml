@@ -1,0 +1,32 @@
+﻿@model Nutris.Models.PlanoPaciente
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutNutri.cshtml";
+}
+
+<h2>Desassociar Paciente</h2>
+
+<h3>Tem certeza?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="button" class="btn btn-default" value="Retornar" onclick="location.href='@Url.Action("PlanoPacienteIndex", new { IdPlanoPaciente = Model.IdPlanoAlimentar})'" />
+            <input type="submit" value="Confirmar" class="btn btn-danger" />
+        </div>
+    }
+</div>

@@ -9,6 +9,8 @@
     <h2>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Nome)</h2>
     <h4>@Html.DisplayFor(modelItem => Model.PlanoAlimentar.Descricao)</h4>
     <br />
+    <input type="button" class="btn btn-default btn-sm" value="Associar Pacientes" onclick="location.href='@Url.Action("PlanoPacienteIndex", new { IdPlanoAlimentar = Model.PlanoAlimentar.Id })'" />
+    <br />
     <h5>Dieta do Plano:</h5>
     <table class="table table-hover">
         <thead>
@@ -21,18 +23,18 @@
         <tbody>
             @foreach (var item in Model.items)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantia)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "EditItem", new { id = item.Id }) |
-                    @Html.ActionLink("Excluir", "DeleteItem", new { id = item.Id })
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantia)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditItem", new { id = item.Id }) |
+                        @Html.ActionLink("Excluir", "DeleteItem", new { id = item.Id })
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

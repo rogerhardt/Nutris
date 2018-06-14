@@ -23,6 +23,14 @@
           <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
+        <EntityType Name="PlanoPaciente">
+          <Key>
+            <PropertyRef Name="IdPlanoAlimentar" />
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="IdPlanoAlimentar" Type="int" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Receita">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,6 +51,7 @@
         <EntityContainer Name="NutrisModelStoreContainer">
           <EntitySet Name="ItemPlanoAlimentar" EntityType="Self.ItemPlanoAlimentar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlanoAlimentar" EntityType="Self.PlanoAlimentar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanoPaciente" EntityType="Self.PlanoPaciente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receita" EntityType="Self.Receita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -64,6 +73,7 @@
           <EntitySet Name="PlanoAlimentar" EntityType="NutrisModel.PlanoAlimentar" />
           <EntitySet Name="Receitas" EntityType="NutrisModel.Receita" />
           <EntitySet Name="ItemPlanoAlimentar" EntityType="NutrisModel.ItemPlanoAlimentar" />
+          <EntitySet Name="PlanoPaciente" EntityType="NutrisModel.PlanoPaciente" />
         </EntityContainer>
         <EntityType Name="PlanoAlimentar">
           <Key>
@@ -90,6 +100,14 @@
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Quantia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdPlanoAlimentar" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlanoPaciente">
+          <Key>
+            <PropertyRef Name="IdPlanoAlimentar" />
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="IdPlanoAlimentar" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -133,6 +151,14 @@
                 <ScalarProperty Name="Quantia" ColumnName="Quantia" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanoPaciente">
+            <EntityTypeMapping TypeName="NutrisModel.PlanoPaciente">
+              <MappingFragment StoreEntitySet="PlanoPaciente">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="IdPlanoAlimentar" ColumnName="IdPlanoAlimentar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

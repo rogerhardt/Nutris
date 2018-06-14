@@ -39,7 +39,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.rememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
+                <div class="checkbox col-md-10">
                     @Html.EditorFor(model => model.rememberMe)
                     @Html.ValidationMessageFor(model => model.rememberMe, "", new { @class = "text-danger" })
                 </div>
