@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="NutrisModel.Receita" Width="1.5" PointX="3.375" PointY="3" />
         <EntityTypeShape EntityType="NutrisModel.ItemPlanoAlimentar" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="NutrisModel.PlanoPaciente" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NutrisModel.Avaliacao" Width="1.75" PointX="5.25" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
