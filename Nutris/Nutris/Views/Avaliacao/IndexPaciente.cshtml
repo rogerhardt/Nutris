@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Nutris.Models.Avaliacao>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<h2>Avaliações</h2>
+<br />
+<input type="button" class="btn btn-primary btn-sm" value="Cadastrar nova avaliação" onclick="location.href='@Url.Action("Create")'" />
+<p />
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+
+        <th>
+            Nutricionista
+        </th>
+        <th>
+            Paciente
+        </th>
+
+        <th>Ações</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loginNutricionista)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loginPaciente)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
