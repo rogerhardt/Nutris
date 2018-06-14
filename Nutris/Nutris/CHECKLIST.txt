@@ -3,6 +3,8 @@
 	- Login
 	- Cadastro de Planos Alimentares e Subitens
 	- Alterar usuário Cliente para usuário Paciente para ficar mais condizente (Opcional)
+	- Associar Planos Alimentares a Clientes(Pacientes)
+	- Cliente(Paciente) visualizar seus planos alimentares
 
  TODO:
 	- Usuário Nutricionista Manter Avaliação de Pacientes (importante)
@@ -12,8 +14,7 @@
 	- Ajustar páginas IndexCliente e IndexNutri do Home para mostrar botões e informações relevantes.
 
 DOING Róger:
-	- Associar Planos Alimentares a Clientes(Pacientes)
-	- Cliente(Paciente) visualizar seus planos alimentares
+	
 
 DOING Leonardo
 	

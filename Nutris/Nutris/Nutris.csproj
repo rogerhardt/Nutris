@@ -298,6 +298,8 @@
     <Content Include="Views\Avaliacao\Index.cshtml" />
     <Content Include="Views\Avaliacao\Delete.cshtml" />
     <Content Include="Views\Avaliacao\Details.cshtml" />
+    <Content Include="Views\PlanoAlimentar\IndexPaciente.cshtml" />
+    <Content Include="Views\PlanoAlimentar\PacienteDetails.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

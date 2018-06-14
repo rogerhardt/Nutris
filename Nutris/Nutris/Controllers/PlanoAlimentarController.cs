@@ -21,6 +21,18 @@ namespace Nutris.Controllers
             return View(db.PlanoAlimentar.Where(a => a.Usuario == User.Identity.Name).ToList());
         }
 
+        [Authorize]
+        public ActionResult IndexPaciente()
+        {
+            List<PlanoPaciente> PlanosPaciente = db.PlanoPaciente.Where(a => a.Login == User.Identity.Name).ToList();
+            List<PlanoAlimentar> PlanosAlimentares = new List<PlanoAlimentar>();
+            foreach (PlanoPaciente planoPaciente in PlanosPaciente)
+            {
+                PlanosAlimentares.Add(db.PlanoAlimentar.Where(a => a.Id == planoPaciente.IdPlanoAlimentar).FirstOrDefault());
+            }
+            return View(PlanosAlimentares);
+        }
+
         // GET: PlanoAlimentar/Details/5
         [Authorize]
         public ActionResult Details(int? id)
@@ -64,6 +76,12 @@ namespace Nutris.Controllers
             return View(PlanoPacienteView);
         }
 
+        [Authorize]
+        public ActionResult PacienteDetails(int? id)
+        {
+            return (Details(id));
+        }
+
         // GET: PlanoAlimentar/Create
         [Authorize]
         public ActionResult Create()
@@ -74,9 +92,21 @@ namespace Nutris.Controllers
         [Authorize]
         public ActionResult CreateItem(int IdPlanoAlimentar)
         {
-            ItemPlanoAlimentar item = new ItemPlanoAlimentar();
-            item.IdPlanoAlimentar = IdPlanoAlimentar;
+            ItemPlanoAlimentar item = new ItemPlanoAlimentar
+            {
+                IdPlanoAlimentar = IdPlanoAlimentar
+            };
             return View(item);
+        }
+
+        [Authorize]
+        public ActionResult CreatePlanoPaciente(int IdPlanoAlimentar)
+        {
+            PlanoPaciente plano = new PlanoPaciente
+            {
+                IdPlanoAlimentar = IdPlanoAlimentar
+            };
+            return View(plano);
         }
 
         // POST: PlanoAlimentar/Create
@@ -110,6 +140,20 @@ namespace Nutris.Controllers
                 return RedirectToAction("Details", new { id = ItemPlanoAlimentar.IdPlanoAlimentar});
             }
             return View(ItemPlanoAlimentar);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePlanoPaciente([Bind(Include = "IdPlanoAlimentar,Login")] PlanoPaciente PlanoPaciente)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PlanoPaciente.Add(PlanoPaciente);
+                db.SaveChanges();
+                return RedirectToAction("PlanoPacienteIndex", new { id = PlanoPaciente.IdPlanoAlimentar });
+            }
+            return View(PlanoPaciente);
         }
 
         // GET: PlanoAlimentar/Edit/5
@@ -205,6 +249,21 @@ namespace Nutris.Controllers
             return View(ItemPlanoAlimentar);
         }
 
+        [Authorize]
+        public ActionResult DeletePlanoPaciente(int? IdPlanoAlimentar, String Login)
+        {
+            if (IdPlanoAlimentar == null || Login == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PlanoPaciente PlanoPaciente = db.PlanoPaciente.Where(a => a.IdPlanoAlimentar == IdPlanoAlimentar && a.Login == Login).FirstOrDefault();
+            if (PlanoPaciente == null)
+            {
+                return HttpNotFound();
+            }
+            return View(PlanoPaciente);
+        }
+
         // POST: PlanoAlimentar/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -226,6 +285,17 @@ namespace Nutris.Controllers
             db.ItemPlanoAlimentar.Remove(ItemPlanoAlimentar);
             db.SaveChanges();
             return RedirectToAction("Details", new { id = ItemPlanoAlimentar.IdPlanoAlimentar });
+        }
+
+        [HttpPost, ActionName("DeletePlanoPaciente")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult DeletePlanoPacienteConfirmed(int? IdPlanoAlimentar, String Login)
+        {
+            PlanoPaciente PlanoPaciente = db.PlanoPaciente.Where(a => a.IdPlanoAlimentar == IdPlanoAlimentar && a.Login == Login).FirstOrDefault();
+            db.PlanoPaciente.Remove(PlanoPaciente);
+            db.SaveChanges();
+            return RedirectToAction("PlanoPacienteIndex", new { id = PlanoPaciente.IdPlanoAlimentar });
         }
 
         [Authorize]
