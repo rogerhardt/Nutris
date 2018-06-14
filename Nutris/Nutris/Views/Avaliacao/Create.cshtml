@@ -18,9 +18,13 @@
     <div class="form-group">
       
         <div class="col-md-10">
-           
+            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.LabelFor(model => model.loginNutricionista, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.loginNutricionista, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.LabelFor(model => model.loginPaciente, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.loginPaciente, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
@@ -28,7 +32,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Detalhe, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <textarea cols="20" htmlattributes="{ class = form-control }" id="Descricao" name="Descricao" rows="2" style="margin: 0px; width: 280px; height: 178px;"></textarea>
+            <textarea cols="20" htmlattributes="{ class = form-control }" id="Descricao" name="Detalhe" rows="2" style="margin: 0px; width: 280px; height: 178px;"></textarea>
             @Html.ValidationMessageFor(model => model.Detalhe, "", new { @class = "text-danger" })
         </div>
     </div>

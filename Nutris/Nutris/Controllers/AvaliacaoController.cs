@@ -50,48 +50,27 @@ namespace Nutris.Controllers
             return View();
         }
 
-        [Authorize]
-        public ActionResult CreateItem(int IdPlanoAlimentarx)
-        {
-            ItemPlanoAlimentar item = new ItemPlanoAlimentar();
-            item.IdPlanoAlimentar = IdPlanoAlimentar;
-            return View(item);
-        }
-
-        // POST: PlanoAlimentar/Create
+        // POST: Avaliacao/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Descricao")] PlanoAlimentar PlanoAlimentar)
+        public ActionResult Create([Bind(Include = "Data,loginNutricionista,loginPaciente, Detalhe")] Avaliacao Avaliacao)
         {
             if (ModelState.IsValid)
             {
-                PlanoAlimentar.Usuario = User.Identity.Name;
-                db.PlanoAlimentar.Add(PlanoAlimentar);
+                Avaliacao.loginPaciente = User.Identity.Name;
+                db.Avaliacao.Add(Avaliacao);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(PlanoAlimentar);
+            return View(Avaliacao);
         }
 
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateItem([Bind(Include = "Id,Descricao,Quantia,IdPlanoAlimentar")] ItemPlanoAlimentar ItemPlanoAlimentar)
-        {
-            if (ModelState.IsValid)
-            {
-                db.ItemPlanoAlimentar.Add(ItemPlanoAlimentar);
-                db.SaveChanges();
-                return RedirectToAction("Details", new { id = ItemPlanoAlimentar.IdPlanoAlimentar });
-            }
-            return View(ItemPlanoAlimentar);
-        }
 
-        // GET: PlanoAlimentar/Edit/5
+        // GET: Avaliacao/Edit/5
         [Authorize]
         public ActionResult Edit(int? id)
         {
@@ -99,61 +78,16 @@ namespace Nutris.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PlanoAlimentar PlanoAlimentar = db.PlanoAlimentar.Find(id);
-            if (PlanoAlimentar == null)
+            Avaliacao Avaliacao = db.Avaliacao.Find(id);
+            if (Avaliacao == null)
             {
                 return HttpNotFound();
             }
-            return View(PlanoAlimentar);
+            return View(Avaliacao);
         }
 
-        [Authorize]
-        public ActionResult EditItem(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ItemPlanoAlimentar ItemPlanoAlimentar = db.ItemPlanoAlimentar.Find(id);
-            if (ItemPlanoAlimentar == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ItemPlanoAlimentar);
-        }
 
-        // POST: PlanoAlimentar/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Descricao,Usuario")] PlanoAlimentar PlanoAlimentar)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(PlanoAlimentar).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(PlanoAlimentar);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult EditItem([Bind(Include = "Id,Descricao,Quantia,IdPlanoAlimentar")] ItemPlanoAlimentar ItemPlanoAlimentar)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(ItemPlanoAlimentar).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Details", new { id = ItemPlanoAlimentar.IdPlanoAlimentar });
-            }
-            return View(ItemPlanoAlimentar);
-        }
-
-        // GET: PlanoAlimentar/Delete/5
+        // GET: Avaliacao/Delete/5
         [Authorize]
         public ActionResult Delete(int? id)
         {
@@ -161,51 +95,58 @@ namespace Nutris.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PlanoAlimentar PlanoAlimentar = db.PlanoAlimentar.Find(id);
-            if (PlanoAlimentar == null)
+            Avaliacao Avaliacao= db.Avaliacao.Find(id);
+            if (Avaliacao == null)
             {
                 return HttpNotFound();
             }
-            return View(PlanoAlimentar);
+            return View(Avaliacao);
         }
 
+       
+
         [Authorize]
-        public ActionResult DeleteItem(int? id)
+        public ActionResult DeleteAvaliacao(int? IdAvaliacao)
         {
-            if (id == null)
+            if (IdAvaliacao == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ItemPlanoAlimentar ItemPlanoAlimentar = db.ItemPlanoAlimentar.Find(id);
-            if (ItemPlanoAlimentar == null)
+            Avaliacao Avaliacao= db.Avaliacao.Where(a => a.Id == IdAvaliacao).FirstOrDefault();
+            if (Avaliacao == null)
             {
                 return HttpNotFound();
             }
-            return View(ItemPlanoAlimentar);
+            return View(Avaliacao);
         }
 
-        // POST: PlanoAlimentar/Delete/5
+        // POST: Avaliacao/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            PlanoAlimentar PlanoAlimentar = db.PlanoAlimentar.Find(id);
-            db.PlanoAlimentar.Remove(PlanoAlimentar);
+            Avaliacao Avaliacao = db.Avaliacao.Find(id);
+            db.Avaliacao.Remove(Avaliacao);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ActionName("DeleteItem")]
+
+        [HttpPost, ActionName("DeleteAvaliacao")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult DeleteItemConfirmed(int id)
+        public ActionResult DeleteAvaliacaoConfirmed(int? idAvaliacao)
         {
-            ItemPlanoAlimentar ItemPlanoAlimentar = db.ItemPlanoAlimentar.Find(id);
-            db.ItemPlanoAlimentar.Remove(ItemPlanoAlimentar);
+            Avaliacao Avaliacao = db.Avaliacao.Where(a => a.Id == idAvaliacao ).FirstOrDefault();
+            db.Avaliacao.Remove(Avaliacao);
             db.SaveChanges();
-            return RedirectToAction("Details", new { id = ItemPlanoAlimentar.IdPlanoAlimentar });
+            return RedirectToAction("AvaliacaoIndex", new { id = Avaliacao.Id});
         }
+
+
+
+
 
         [Authorize]
         protected override void Dispose(bool disposing)
