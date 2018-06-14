@@ -18,6 +18,13 @@ namespace Nutris.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            return View(db.Avaliacao.Where(a => a.loginNutricionista == User.Identity.Name).ToList());
+        }
+
+        // GET: Avaliação
+        [Authorize]
+        public ActionResult IndexPaciente()
+        {
             return View(db.Avaliacao.Where(a => a.loginPaciente == User.Identity.Name).ToList());
         }
 
@@ -60,7 +67,7 @@ namespace Nutris.Controllers
         {
             if (ModelState.IsValid)
             {
-                Avaliacao.loginPaciente = User.Identity.Name;
+                Avaliacao.loginNutricionista = User.Identity.Name;
                 db.Avaliacao.Add(Avaliacao);
                 db.SaveChanges();
                 return RedirectToAction("Index");

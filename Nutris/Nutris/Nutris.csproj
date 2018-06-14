@@ -300,6 +300,7 @@
     <Content Include="Views\Avaliacao\Details.cshtml" />
     <Content Include="Views\PlanoAlimentar\IndexPaciente.cshtml" />
     <Content Include="Views\PlanoAlimentar\PacienteDetails.cshtml" />
+    <Content Include="Views\Avaliacao\IndexPaciente.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
